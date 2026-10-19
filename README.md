@@ -1,6 +1,9 @@
 # Igloo Inc. // 3D Interactive Model Deconstruction
 
-An interactive WebGL2 / Three.js 3D reconstruction of the signature deconstructed ice dome inspired by [igloo.inc](https://igloo.inc/). This project demonstrates real-time procedural physics, harmonic dual-stage low-pass filtering, dynamic shader lightmap transitions, and a holographic telemetry HUD.
+[![GitHub Repository](https://img.shields.io/badge/GitHub-mkp151203%2FIgloo--inc--study-181717?style=for-the-badge&logo=github)](https://github.com/mkp151203/Igloo-inc-study)
+[![Original Concept](https://img.shields.io/badge/Original_Concept-igloo.inc-38bdf8?style=for-the-badge)](https://igloo.inc/)
+
+An interactive WebGL2 / Three.js 3D reconstruction of the signature deconstructed ice dome inspired by [igloo.inc](https://igloo.inc/). This project demonstrates real-time procedural physics, harmonic dual-stage low-pass filtering, dynamic shader lightmap transitions, and a holographic telemetry HUD. Reverse-engineered and reconstructed as an educational study using **Gemini 3.8 Flash** paired with the **REA (Reverse Engineer Anything) MCP**.
 
 ---
 
@@ -92,8 +95,8 @@ The project is structured into focused, single-responsibility ES modules under `
 ### Installation
 ```bash
 # Clone repository
-git clone https://github.com/your-username/igloo-deconstruction.git
-cd igloo-deconstruction
+git clone https://github.com/mkp151203/Igloo-inc-study.git
+cd Igloo-inc-study
 
 # Install dependencies
 npm install
@@ -113,20 +116,8 @@ Generates optimized static assets in the `dist/` directory.
 
 ---
 
-## 🕹️ Controls & Interactions
+## 📬 Contact & Links
 
-| Action | Control | Description |
-|---|---|---|
-| **Hover / Swipe** | Mouse / Trackpad | Displaces faceted ice blocks with low-pass inertia |
-| **Orbit** | Left-Click + Drag | Rotates camera around the igloo in 3D |
-| **Glacial Shockwave** | Click on any block | Triggers a radial pulse ripple through the masonry joints |
-| **Toggle Audio** | Audio Button | Toggles spatial polar wind and crystalline drone resonance |
-| **Replay Intro** | Replay Button | Triggers the cascading intro wave materialize sequence |
-| **Reset Camera** | Reset Cam Button | Smoothly reframes to canonical 30° isometric perspective |
-
----
-
-## 📬 Contact
-
-For inquiries, feedback, or copyright takedown requests:
+* **Repository**: [https://github.com/mkp151203/Igloo-inc-study](https://github.com/mkp151203/Igloo-inc-study)
+* **Original Inspiration**: [https://igloo.inc/](https://igloo.inc/)
 * **Email**: [mehulkumar2003@gmail.com](mailto:mehulkumar2003@gmail.com)
