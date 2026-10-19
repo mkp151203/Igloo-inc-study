@@ -1,0 +1,19 @@
+{
+  "name": "igloo-webgl-reconstruction",
+  "version": "1.0.0",
+  "description": "Interactive WebGL 3D reconstruction of Igloo Inc. featuring Three.js, procedural ice terrain, floating portfolio cubes, blizzard particles, and Web Audio.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5173 --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "three": "^0.165.0"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0",
+    "ws": "^8.22.0"
+  }
+}

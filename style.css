@@ -1,0 +1,409 @@
+/* ==========================================================================
+   IGLOO INC. - TECHNICAL 3D INTERACTIVE MODEL DECONSTRUCTION
+   Design System: Glacial Monospace HUD inspired by Abeto Studio & Igloo Inc.
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+:root {
+  --bg-deep: #050811;
+  --ice-glow: #38bdf8;
+  --cyan-bright: #7ee8fa;
+  --ice-white: #e0f2fe;
+  --hud-text-dim: #64748b;
+  --hud-text-med: #94a3b8;
+  --hud-text-bright: #f8fafc;
+  --hud-bg-translucent: rgba(7, 12, 22, 0.72);
+  --hud-border: rgba(56, 189, 248, 0.22);
+  --hud-border-bright: rgba(56, 189, 248, 0.55);
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-deep);
+  font-family: var(--font-mono);
+  color: var(--hud-text-bright);
+}
+
+#webgl-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: hidden;
+  z-index: 1;
+}
+
+#webgl-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  outline: none;
+  cursor: grab;
+}
+
+#webgl-canvas:active {
+  cursor: grabbing;
+}
+
+/* --------------------------------------------------------------------------
+   HUD OVERLAY LAYER
+   -------------------------------------------------------------------------- */
+#hud-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.75rem 2rem;
+}
+
+/* Header */
+.hud-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-width: fit-content;
+}
+
+.hud-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.hud-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--ice-glow);
+  box-shadow: 0 0 10px var(--ice-glow);
+  animation: pulseIndicator 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseIndicator {
+  0%, 100% { opacity: 0.5; transform: scale(0.9); }
+  50% { opacity: 1.0; transform: scale(1.15); box-shadow: 0 0 14px var(--cyan-bright); }
+}
+
+.hud-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--hud-text-bright);
+}
+
+.hud-badge {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid var(--hud-border);
+  color: var(--cyan-bright);
+}
+
+.hud-subtitle {
+  font-size: 0.62rem;
+  color: var(--hud-text-dim);
+  letter-spacing: 0.07em;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.hud-inline-link {
+  color: var(--cyan-bright);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(56, 189, 248, 0.45);
+  pointer-events: auto;
+  transition: all 0.2s ease;
+}
+
+.hud-inline-link:hover {
+  color: #ffffff;
+  border-bottom-color: var(--cyan-bright);
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+}
+
+.hud-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.68rem;
+  color: var(--hud-text-dim);
+  letter-spacing: 0.05em;
+}
+
+.hud-sep {
+  opacity: 0.4;
+}
+
+/* Controls */
+.hud-controls {
+  position: absolute;
+  top: 1.75rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  pointer-events: auto;
+}
+
+.hud-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--hud-text-med);
+  background: var(--hud-bg-translucent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--hud-border);
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hud-btn:hover {
+  color: var(--hud-text-bright);
+  border-color: var(--hud-border-bright);
+  background: rgba(14, 26, 44, 0.85);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);
+  transform: translateY(-1px);
+}
+
+.hud-btn:active {
+  transform: translateY(0);
+}
+
+/* Prominent Original Site Redirect Button */
+.hud-btn-redirect {
+  border-color: rgba(56, 189, 248, 0.45);
+  background: rgba(14, 38, 64, 0.6);
+  color: var(--cyan-bright);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.15);
+}
+
+.hud-btn-redirect:hover {
+  border-color: var(--cyan-bright);
+  background: rgba(20, 52, 90, 0.9);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+.hud-icon {
+  width: 13px;
+  height: 13px;
+  color: var(--ice-glow);
+}
+
+.hud-icon.hidden {
+  display: none;
+}
+
+/* Bottom Left Telemetry Panel */
+.hud-telemetry {
+  max-width: 250px;
+  background: var(--hud-bg-translucent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--hud-border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.25rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+.hud-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+}
+
+.hud-telemetry-indicator {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--cyan-bright);
+  box-shadow: 0 0 6px var(--cyan-bright);
+}
+
+.hud-panel-title {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--cyan-bright);
+}
+
+.telemetry-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.telemetry-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.68rem;
+}
+
+.telemetry-label {
+  color: var(--hud-text-dim);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+}
+
+.telemetry-val {
+  color: var(--hud-text-bright);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+/* Bottom Center Guidance */
+.hud-guidance {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.guidance-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem 0.95rem;
+  font-size: 0.65rem;
+  color: var(--hud-text-med);
+  background: var(--hud-bg-translucent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--hud-border);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+}
+
+.guidance-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--cyan-bright);
+  box-shadow: 0 0 8px var(--cyan-bright);
+}
+
+.guidance-sep {
+  opacity: 0.35;
+}
+
+/* Bottom Right Credits */
+.hud-credits {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.62rem;
+  color: var(--hud-text-dim);
+  letter-spacing: 0.06em;
+}
+
+.credit-link {
+  color: var(--cyan-bright);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(56, 189, 248, 0.4);
+  padding-bottom: 1px;
+  pointer-events: auto;
+  transition: all 0.2s ease;
+}
+
+.credit-link:hover {
+  color: #ffffff;
+  border-bottom-color: var(--cyan-bright);
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #hud-overlay {
+    padding: 1rem;
+  }
+  .hud-subtitle {
+    display: none;
+  }
+  .hud-guidance {
+    display: none;
+  }
+  .hud-controls {
+    top: 1rem;
+    right: 1rem;
+    gap: 0.35rem;
+  }
+  .hud-btn {
+    padding: 0.35rem 0.55rem;
+    font-size: 0.62rem;
+  }
+  .hud-credits {
+    display: none;
+  }
+  .hud-telemetry {
+    max-width: 220px;
+    padding: 0.65rem 0.85rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   PLEXUS HUD D3 DISTANCE TELEMETRY BADGES
+   -------------------------------------------------------------------------- */
+#plexus-tags-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.plexus-node-tag {
+  position: absolute;
+  transform: translate(0, -50%);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #e0f4ff;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 5px rgba(167, 239, 255, 0.65), 0 0 10px rgba(56, 189, 248, 0.4);
+  pointer-events: none;
+  white-space: nowrap;
+  user-select: none;
+  transition: opacity 0.12s ease-out;
+}
+
